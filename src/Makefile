@@ -5,7 +5,9 @@ $(error ANDROID_NDK_HOME is not set)
 endif
 
 ARCH=aarch64
-TOOLCHAIN=$(ANDROID_NDK_HOME)/toolchains/llvm/prebuilt/linux-x86_64
+TOOLCHAIN=$(ANDROID_NDK_HOME)/toolchains/llvm/prebuilt/darwin-x86_64
+#ARCH=x86_64
+#TOOLCHAIN=$(ANDROID_NDK_HOME)/toolchains/llvm/prebuilt/linux-x86_64
 TARGET=$(ARCH)-linux-android
 API=30
 

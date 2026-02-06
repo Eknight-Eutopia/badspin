@@ -68,6 +68,7 @@ struct rw_info;
 
 u64 samsung_kimg_to_lm(struct rw_info *rw, u64 kaddr);
 u64 pixel_kimg_to_lm(struct rw_info *rw, u64 kaddr);
+u64 pixel_emu_kimg_to_lm(struct rw_info *rw, u64 kaddr);
 
 u64 scan_kbase(struct rw_info *rw);
 u64 noop_kbase(struct rw_info *rw);
@@ -131,6 +132,17 @@ static struct device_config {
         .kernel_version = KERNEL_VERSION(5, 10, 66),
         .kimg_to_lm = pixel_kimg_to_lm,
         .find_kbase = noop_kbase,
+    },
+    {
+        /* Oriole 12 Test Version */
+        .name = "Android SDK built for arm64",
+        .model = "Android SDK built for arm64",
+        .android_version = 12,
+        .android_security_patch.year = 2022,
+        .android_security_patch.month = 8,
+        .kernel_version = KERNEL_VERSION(5, 10, 110),
+        .kimg_to_lm = pixel_emu_kimg_to_lm,
+        .find_kbase = noop_kbase, 
     },
     {
         /* Oriole 13.0.0 (TP1A.220905.004, Sep 2022) */

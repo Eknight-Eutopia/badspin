@@ -39,6 +39,10 @@ u64 pixel_kimg_to_lm(struct rw_info *rw, u64 kaddr) {
     return 0xffffff8000000000UL + (kaddr - rw->ki.kernel_base);
 }
 
+u64 pixel_emu_kimg_to_lm(struct rw_info *rw, u64 kaddr) {
+    return 0xffffff8000200000UL + (kaddr - rw->ki.kernel_base);
+}
+
 static inline u64 kimg_to_lm(struct rw_info *rw, u64 kaddr) {
     if (is_lm_addr(kaddr)) {
         return kaddr;
@@ -274,7 +278,7 @@ void __pipe_kread(int ptmx, int pipefd[2], u64 buf_ops, u64 kaddr, void *buf, u6
     struct pipe_buffer pipe_buf;
     memset(&pipe_buf, 0, sizeof(struct pipe_buffer));
     pipe_buf.page = virt_to_page(kaddr);
-    // LOG("[%s] kaddr = %016lx  page = %016lx  size = %08x\n", __func__, kaddr, pipe_buf.page, (u32)size);
+    # LOG("[%s] kaddr = %016lx  page = %016lx  size = %08x\n", __func__, kaddr, pipe_buf.page, (u32)size);
     pipe_buf.offset = 0;
     pipe_buf.len = 0x1000 + 1;
     pipe_buf.ops = buf_ops;
@@ -573,7 +577,9 @@ int find_task_struct_offsets(struct rw_info *rw) {
     bool found_real_parent = false;
 
     kread(rw, init_task, init_task_dump, 0x1000);
-
+    for (int offset = 0; offset < 0x1000 - 8; offset += 8) {
+        LOGD("%016lx ", *(u64 *) &init_task_dump[offset]);
+    }
     for (int offset = 0; offset < 0x1000 - 8; offset += 8) {
         u64 v1 = *(u64 *)&init_task_dump[offset];
         u64 v2 = *(u64 *)&init_task_dump[offset+8];

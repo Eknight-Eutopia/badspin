@@ -190,7 +190,7 @@ int do_client_a(poc_client_t *client) {
 
     binder_enter_looper(client->binder.fd);
 
-    /* Recieve strong handles from C */
+    /* Receive strong handles from C */
     rc = recv_strong_refs(client);
     if (rc < 0) {
         return -1;

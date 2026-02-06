@@ -82,6 +82,7 @@ typedef uint64_t u64;
   __typeof__(x) __res = (x);          \
   if (__res == (__typeof__(x))-1) {   \
     LOG("SYSCHK(" #x ")");            \
+    perror("Error");                  \
     exit(1);                          \
   }                                   \
   __res;                              \
