@@ -135,7 +135,7 @@ static struct device_config {
     },
     {
         /* Oriole 12 Test Version */
-        .name = "Android SDK built for arm64",
+        .name = "Google Pixel 6",
         .model = "Android SDK built for arm64",
         .android_version = 12,
         .android_security_patch.year = 2022,

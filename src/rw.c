@@ -278,7 +278,7 @@ void __pipe_kread(int ptmx, int pipefd[2], u64 buf_ops, u64 kaddr, void *buf, u6
     struct pipe_buffer pipe_buf;
     memset(&pipe_buf, 0, sizeof(struct pipe_buffer));
     pipe_buf.page = virt_to_page(kaddr);
-    # LOG("[%s] kaddr = %016lx  page = %016lx  size = %08x\n", __func__, kaddr, pipe_buf.page, (u32)size);
+    // LOG("[%s] kaddr = %016lx  page = %016lx  size = %08x\n", __func__, kaddr, pipe_buf.page, (u32)size);
     pipe_buf.offset = 0;
     pipe_buf.len = 0x1000 + 1;
     pipe_buf.ops = buf_ops;
